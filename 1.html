@@ -17,8 +17,8 @@
             }
         };
     </script>
-    <link rel="stylesheet" href="//localhost/jsapi/3.17/esri/css/esri.css">
-    <script src="//localhost/jsapi/3.17/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.17/esri/css/esri.css">
+    <script src="https://js.arcgis.com/3.17/"></script>
 </head>
 <body>
 
@@ -32,10 +32,8 @@
 <script type="text/javascript">
     var map;
     require(
-            ["esri/map", 'js/TianDiTuLayer', 'js/tile', "esri/layers/ArcGISDynamicMapServiceLayer",'dojo/domReady!'],
-            function (Map, TianDiTuLayer, tile,ArcGISDynamicMapServiceLayer) {
-                esri.config.defaults.io.corsEnabledServers.push("www.tiandituhubei.com:6080");
-                esri.config.defaults.io.proxyUrl = "http://localhost/proxy.ashx";
+            ["esri/map",  'js/tile', "esri/layers/ArcGISDynamicMapServiceLayer",'dojo/domReady!'],
+            function (Map,  tile,ArcGISDynamicMapServiceLayer) {
                 var option = {
                     logo: false,
                     center: [112.63645004890844, 30.010550950489034],
@@ -45,13 +43,13 @@
                 map.on('click',function (e) {
                     console.log(e.mapPoint)
                 })
-                url = 'https://cen7.vm:6443/arcgis/rest/services/china/MapServer'
 
-                basemap = new esrichina.TianDiTuLayer(esrichina.TianDiTuLayer.VEC_BASE_GCS);
+                //basemap = new esrichina.TianDiTuLayer(esrichina.TianDiTuLayer.VEC_BASE_GCS);
+                basemap = new tile()
 //                overlay = new tile(
 //                        "http://www.tiandituhubei.com:6080/arcgis/rest/services/IMG_ZY3_HB/MapServer");
                 map.addLayer(basemap);
-                map.addLayer(new ArcGISDynamicMapServiceLayer(url))
+                map.addLayer(new ArcGISDynamicMapServiceLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer'))
 //                map.addLayer(overlay);
 
             });
